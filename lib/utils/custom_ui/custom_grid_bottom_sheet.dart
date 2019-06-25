@@ -113,9 +113,17 @@ class _CustomGridBottomSheetState extends State<CustomGridBottomSheet> {
         break;
       case Eyes:
         Eyes.values.toList().forEach((value) {
-          SelectItem item = new SelectItem(value,
+          SelectItem item;
+          if (value.toString().split('.')[1] == 'none') {
+            item = new SelectItem(value,
+                imagePath:
+                    "assets/Eyes/" + "default.png");
+          } else {
+            item = new SelectItem(value,
               imagePath:
                   "assets/Eyes/" + value.toString().split('.')[1] + ".png");
+          }
+          
           itemList.add(item);
         });
         break;

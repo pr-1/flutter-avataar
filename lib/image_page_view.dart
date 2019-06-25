@@ -12,13 +12,14 @@ class _ImagePageViewState extends State<ImagePageView> {
   @override
   initState() {
     super.initState();
-    controller = new PageController(
+    controller = PageController(
       initialPage: currentpage,
       keepPage: false,
       viewportFraction: 0.6,
     );
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => controller.jumpTo(1));
   }
-
   @override
   dispose() {
     controller.dispose();
@@ -26,16 +27,20 @@ class _ImagePageViewState extends State<ImagePageView> {
   }
 
   @override
+
+
+  @override
   Widget build(BuildContext context) {
-    return new PageView.builder(
-              onPageChanged: (value) {
-                setState(() {
-                  currentpage = value;
-                });
-              },
-              controller: controller,
-              itemBuilder: (context, index) => builder(index)
-    );
+    return PageView.builder(
+        physics: BouncingScrollPhysics(),
+        itemCount: 5,
+        onPageChanged: (value) {
+          setState(() {
+            currentpage = value;
+          });
+        },
+        controller: controller,
+        itemBuilder: (context, index) => builder(index));
   }
 
   builder(int index) {
@@ -68,7 +73,7 @@ class _ImagePageViewState extends State<ImagePageView> {
                     style: TextStyle(
                         fontSize: Curves.easeOut.transform(value) * 32,
                         fontWeight: FontWeight.w200,
-                        color: Colors.white),
+                        color: Colors.blue),
                   )
                 ],
               ),

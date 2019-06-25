@@ -139,8 +139,4 @@ class _HomePageState extends State<HomePage> {
   String _getAvataarUrl(Options options) {
     return getSvg(options);
   }
-
-  String _getOptionString(dynamic innerOption) {
-    return '=' + innerOption.toString().split('.')[1] + '&';
-  }
 }
